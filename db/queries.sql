@@ -3,6 +3,6 @@ SELECT * FROM department
 SELECT * FROM job_role
 
 
-SELECT ( employee_ids, first_name, last_name, manager_id) FROM employee 
-
-JOIN ( title, department_id, salary) FROM job_role
+SELECT ( employee.employee_ids, employee.first_name, employee.last_name, employee.manager_id) 
+FROM employee 
+INNER JOIN job_role ON ( job_role.title, job_role.department_id, job_role.salary) 

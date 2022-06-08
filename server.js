@@ -49,10 +49,15 @@ function businessQuestions() {
         //View all departments
         .then((answers) => {
             console.log(answers)
-            if (answers.business === 'View all departments') {
-                console.log('You selected view all departments');
+            if (answers.business === "View all departments") {
+                console.log('You selected view all departments')
                 viewDepartments()
-
+            } else if (answers.business === 'View all roles') {
+                console.log('You selected view all roles')
+                viewRoles()
+            } else if (answers.business === 'View all employees') {
+                console.log('You selected view all employees');
+                viewEmployees()
             }
             // Use user feedback for... whatever!!
         })
@@ -68,7 +73,25 @@ function businessQuestions() {
 }
 
 function viewDepartments() {
-    db.query("SELECT ( employee.id, employee.first_name, employee.last_name, employee.manager_id, job_role.salary, job_role.department_id, job_role.title) FROM employee INNER JOIN job_role ON (job_role.id) = employee.role_id ", function (err, results) {
+    db.query("SELECT * FROM department", function (err, results) {
+        if (err) {
+            console.log(err)
+        }
+        console.table(results)
+    })
+}
+
+function viewRoles() {
+    db.query("SELECT * FROM job_role", function (err, results) {
+        if (err) {
+            console.log(err)
+        }
+        console.table(results)
+    })
+}
+
+function viewEmployees() {
+    db.query("SELECT ( employee.id, employee.first_name, employee.last_name, employee.manager_id, job_role.salary, job_role.department_id, job_role.title) FROM employee JOIN job_role ON (job_role.id) = employee.role_id ", function (err, results) {
         if (err) {
             console.log(err)
         }

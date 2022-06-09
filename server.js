@@ -38,7 +38,6 @@ function businessQuestions() {
                     'View all employees',
                     'Add a department',
                     'Add a role',
-                    'View all roles',
                     'Add an employee'
                 ],
             },
@@ -58,6 +57,15 @@ function businessQuestions() {
             } else if (answers.business === 'View all employees') {
                 console.log('You selected view all employees');
                 viewEmployees()
+            } else if (answers.business === 'Add a department') {
+                console.log('You selected add a department');
+                addDepartment()
+            } else if (answers.business === 'Add a role') {
+                console.log('You selected add a role');
+                addRole()
+            } else if (answers.business === 'Add an employee') {
+                console.log('You selected add an employee')
+                addEmployee()
             }
             // Use user feedback for... whatever!!
         })
@@ -73,7 +81,7 @@ function businessQuestions() {
 }
 
 function viewDepartments() {
-    db.query("SELECT * FROM department", function (err, results) {
+    db.query("SELECT * FROM department;", function (err, results) {
         if (err) {
             console.log(err)
         }
@@ -82,7 +90,7 @@ function viewDepartments() {
 }
 
 function viewRoles() {
-    db.query("SELECT * FROM job_role", function (err, results) {
+    db.query("SELECT * FROM job_role;", function (err, results) {
         if (err) {
             console.log(err)
         }
@@ -91,10 +99,22 @@ function viewRoles() {
 }
 
 function viewEmployees() {
-    db.query("SELECT ( employee.id, employee.first_name, employee.last_name, employee.manager_id, job_role.salary, job_role.department_id, job_role.title) FROM employee JOIN job_role ON (job_role.id) = employee.role_id ", function (err, results) {
+    db.query("SELECT employee.id, employee.first_name, employee.last_name, employee.manager_id, job_role.salary, job_role.department_id, job_role.title FROM employee JOIN job_role ON (job_role.id) = employee.role_id;", function (err, results) {
         if (err) {
             console.log(err)
         }
         console.table(results)
     })
+}
+
+function addDepartment() {
+
+}
+
+function addRole() {
+
+}
+
+function addEmployee() {
+
 }
